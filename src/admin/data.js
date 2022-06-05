@@ -1,3 +1,289 @@
+export const doctorSpecializations = [
+    {
+        id: 1,
+        name: "Audiologist",
+        name_id: "audiologist"
+    },
+    {
+        id: 2,
+        name: "Ayurveda",
+        name_id: "ayurveda"
+    },
+    {
+        id: 3,
+        name: "Cardiology",
+        name_id: "audiologist"
+    },
+    {
+        id: 4,
+        name: "Cardiothoracic Surgery",
+        name_id: "Cardiothoracic_Surgery"
+    },
+    {
+        id: 5,
+        name: "Cosmetology",
+        name_id: "Cosmetology"
+    },
+    {
+        id: 6,
+        name: "Cosmetology and Trichology",
+        name_id: "Cosmetology_and_Trichology"
+    },
+    {
+        id: 7,
+        name: "Dental",
+        name_id: "Dental"
+    },
+    {
+        id: 8,
+        name: "Dermatology",
+        name_id: "Dermatology"
+    },
+
+    {
+        id: 9,
+        name: "Dietician",
+        name_id: "Dietician"
+    },
+    {
+        id: 10,
+        name: "Endocrinology",
+        name_id: "Endocrinology"
+    },
+    {
+        id: 11,
+        name: "ENT",
+        name_id: "ENT"
+    },
+    {
+        id: 12,
+        name: "Family Medicine",
+        name_id: "Family_Medicine"
+    },
+    {
+        id: 13,
+        name: "Family Medicine & Geriatrics",
+        name_id: "Family_Medicine_&_Geriatrics"
+    },
+    {
+        id: 14,
+        name: "Gastroenteric Surgery",
+        name_id: "Gastroenteric_Surgery"
+    },
+
+    {
+        id: 15,
+        name: "GastroEnterology",
+        name_id: "GastroEnterology"
+    },
+    {
+        id: 16,
+        name: "General Medicine",
+        name_id: "General_Medicine"
+    },
+    {
+        id: 17,
+        name: "General Physician",
+        name_id: "General_Physician"
+    },
+    {
+        id: 18,
+        name: "General Surgery",
+        name_id: "General_Surgery"
+    },
+    {
+        id: 19,
+        name: "Geriatrics",
+        name_id: "Geriatrics"
+    },
+    {
+        id: 20,
+        name: "Gynaecology",
+        name_id: "Gynaecology"
+    },
+    {
+        id: 21,
+        name: "Hepato-Pancreato-Biliary Surgery",
+        name_id: "Hepato-Pancreato-Biliary-Surgery"
+    },
+    {
+        id: 22,
+        name: "Hepatology",
+        name_id: "Hepatology"
+    },
+    {
+        id: 23,
+        name: "Homoeopathy",
+        name_id: "Homoeopathy"
+    },
+    {
+        id: 24,
+        name: "Infectious Disease",
+        name_id: "Infectious_Disease"
+    },
+    {
+        id: 25,
+        name: "Maxillofacial & Hair Transplant Surgeon",
+        name_id: "Maxillofacial_&_Hair_Transplant_Surgeon"
+    },
+    {
+        id: 26,
+        name: "Nephrology",
+        name_id: "Nephrology"
+    },
+    {
+        id: 27,
+        name: "Neurology",
+        name_id: "Neurology"
+    },
+    {
+        id: 28,
+        name: "Neuropsychiatry",
+        name_id: "Neuropsychiatry"
+    },
+    {
+        id: 29,
+        name: "Neurosurgery",
+        name_id: "Neurosurgery"
+    },
+    {
+        id: 30,
+        name: "Nutrition & Wellness",
+        name_id: "Nutrition_Wellness"
+    },
+    {
+        id: 31,
+        name: "Obstetrics",
+        name_id: "Obstetrics"
+    },
+    {
+        id: 32,
+        name: "Occupational Therapy",
+        name_id: "Occupational_Therapy"
+    },
+    {
+        id: 33,
+        name: "Ophthalmology",
+        name_id: "Ophthalmology"
+    },
+    {
+        id: 34,
+        name: "Orthodontics",
+        name_id: "Orthodontics"
+    },
+    {
+        id: 35,
+        name: "Orthopedics",
+        name_id: "Orthopedics"
+    },
+    {
+        id: 36,
+        name: "Pathology",
+        name_id: "Pathology"
+    },
+    {
+        id: 37,
+        name: "Pediatrics",
+        name_id: "Pediatrics"
+    },
+    {
+        id: 38,
+        name: "Physiotherapy",
+        name_id: "Physiotherapy"
+    },
+    {
+        id: 39,
+        name: "Plastic & Cosmetic Surgery",
+        name_id: "Plastic_Cosmetic_Surgery"
+    },
+    {
+        id: 40,
+        name: "Psychiatry",
+        name_id: "Psychiatry"
+    },
+    {
+        id: 41,
+        name: "Pulmonary Medicine",
+        name_id: "Pulmonary_Medicine"
+    },
+    {
+        id: 42,
+        name: "Rheumatology",
+        name_id: "Rheumatology"
+    },
+    {
+        id: 43,
+        name: "Trichology",
+        name_id: "Trichology"
+    },
+    {
+        id: 44,
+        name: "Urology",
+        name_id: "Urology"
+    },
+    {
+        id: 45,
+        name: "Urosurgery",
+        name_id: "Urosurgery"
+    },
+
+]
+
+export const healthCareType = [
+    {
+        id: 1,
+        name: "Hospital",
+        name_id: "hospital"
+    },
+    {
+        id: 2,
+        name: "Dispensary",
+        name_id: "dispensary"
+    },
+    {
+        id: 3,
+        name: "Community Health Care",
+        name_id: "community"
+    },
+    {
+        id: 4,
+        name: "Nursing Home",
+        name_id: "nursing"
+    },
+    {
+        id: 5,
+        name: "Medical College/Institute",
+        name_id: "medical_collage"
+    },
+    {
+        id: 6,
+        name: "Sub Centre",
+        name_id: "sub_centre"
+    },
+    {
+        id: 7,
+        name: "Poly Clinic",
+        name_id: "poly_clinic"
+    },
+    {
+        id: 8,
+        name: "Dispensary Primary Health Care",
+        name_id: "dispensary_primary"
+    },
+    {
+        id: 9,
+        name: "Clinic",
+        name_id: "clinic"
+    },
+    {
+        id: 10,
+        name: "Others",
+        name_id: "healthcare_others"
+    },
+
+]
+
+
 export const specialities = [
     {
         id: 1,
@@ -60,220 +346,220 @@ export const specialities = [
         name_id: "center_community"
     },
     {
-        id: 12,
+        id: 13,
         name: "Cosmetic Surgery",
         name_id: "cosmetic_surgery"
     },
     {
-        id: 13,
+        id: 14,
         name: "Dermatology and Venereology",
         name_id: "dermatology"
     },
     {
-        id: 14,
+        id: 15,
         name: "Dietetics",
         name_id: "dietetics"
     },
     {
-        id: 15,
+        id: 16,
         name: "Dental",
         name_id: "dental"
     },
     {
-        id: 16,
+        id: 17,
         name: "Endocrinology Metabolism and Diabetes",
         name_id: "endocrinology"
     },
     {
-        id: 17,
+        id: 18,
         name: "Forensic Medicine and Toxicology",
         name_id: "forensic"
     },
     {
-        id: 18,
+        id: 19,
         name: "Gastroenterology and Human Nutrition",
         name_id: "gastroenterology"
     },
     {
-        id: 19,
+        id: 20,
         name: "Gastrointestinal Surgery",
         name_id: "gastrointestinal"
     },
     {
-        id: 20,
+        id: 21,
         name: "General Surgery",
         name_id: "general_surgery"
     },
     {
-        id: 21,
+        id: 22,
         name: "Hematology",
         name_id: "hematology"
     },
     {
-        id: 22,
+        id: 23,
         name: "Internal Medicine",
         name_id: "internal_medicine"
     },
     {
-        id: 23,
+        id: 24,
         name: "Kidney Transplant",
         name_id: "kidney_transplant"
     },
     {
-        id: 24,
+        id: 25,
         name: "Laboratory Medicine",
         name_id: "laboratory_medicine"
     },
     {
-        id: 25,
+        id: 26,
         name: "Liver Transplant",
         name_id: "liver_transplant"
     },
     {
-        id: 26,
+        id: 27,
         name: "Laparoscopic Surgery",
         name_id: "laparoscopic_surgery"
     },
     {
-        id: 27,
+        id: 28,
         name: "Medicine",
         name_id: "medicine"
     },
     {
-        id: 28,
+        id: 29,
         name: "Microbiology",
         name_id: "microbiology"
     },
     {
-        id: 29,
+        id: 30,
         name: "Nephrology",
         name_id: "nephrology"
     },
     {
-        id: 30,
+        id: 31,
         name: "Nuclear Medicine",
         name_id: "nuclear_medicine"
     },
     {
-        id: 31,
+        id: 32,
         name: "Neurology",
         name_id: "neurology"
     },
     {
-        id: 32,
+        id: 33,
         name: "Neuron Surgery",
         name_id: "neuron_surgery"
     },
     {
-        id: 33,
+        id: 34,
         name: "Neuclear Magnetic Resonance Imaging",
         name_id: "neuclear_imaging"
     },
     {
-        id: 34,
+        id: 35,
         name: "Obstetrics and Gynocology",
         name_id: "obstetrics"
     },
     {
-        id: 35,
+        id: 36,
         name: "In Vitro Fertilization (IVF)",
         name_id: "ivf"
     },
     {
-        id: 36,
+        id: 37,
         name: "Oncology / Oncosurgery (Cancer Care)",
         name_id: "oncology"
     },
     {
-        id: 37,
+        id: 38,
         name: "Orthopedics, Ophthalmology (Eye Care)",
         name_id: "orthopedics"
     },
     {
-        id: 38,
+        id: 39,
         name: "Otorhinolaryngology (Ear, Nose and Throat)",
         name_id: "otorhinolaryngology"
     },
     {
-        id: 39,
+        id: 40,
         name: "Pediatrics",
         name_id: "pediatrics"
     },
     {
-        id: 40,
+        id: 41,
         name: "Pediatric Surgery",
         name_id: "pediatric_surgery"
     },
     {
-        id: 41,
+        id: 42,
         name: "Pulmonology / Respiratory Medicine",
         name_id: "pulmonology"
     },
     {
-        id: 42,
+        id: 43,
         name: "Trauma and Emergency Medicine",
         name_id: "trauma_medicine"
     },
     {
-        id: 43,
+        id: 44,
         name: "Plastic Surgery (Reconstractive Sergery)",
         name_id: "plastic_surgey"
     },
     {
-        id: 44,
+        id: 45,
         name: "Pharmacology",
         name_id: "pharmacology"
     },
     {
-        id: 45,
+        id: 46,
         name: "Physiology",
         name_id: "physiology"
     },
     {
-        id: 46,
+        id: 47,
         name: "Physical Medicine and Rehabiliation",
         name_id: "physical_medicine"
     },
     {
-        id: 47,
+        id: 48,
         name: "Phyciatry",
         name_id: "phyciatry"
     },
     {
-        id: 48,
+        id: 49,
         name: "Reproductive Biology",
         name_id: "reproductive_biology"
     },
     {
-        id: 48,
+        id: 50,
         name: "Surgical Diciplines",
         name_id: "surgical_diciplines"
     },
     {
-        id: 49,
+        id: 51,
         name: "Transplant Surgery",
         name_id: "transplant_surgery"
     },
     {
-        id: 50,
+        id: 52,
         name: "Transfusion Medicine (Blood Bank)",
         name_id: "transfusion_medicine"
     },
     {
-        id: 51,
+        id: 53,
         name: "Urology",
         name_id: "urology"
     },
     {
-        id: 52,
+        id: 54,
         name: "Vascular Surgery",
         name_id: "vascular_surgery"
     },
-    {
-        id: 53,
-        name: "Any Other",
-        name_id: "any_other"
-    }
+    // {
+    //     id: 55,
+    //     name: "Any Other",
+    //     name_id: "any_other"
+    // }
 ]
 
 export const ayush = [
@@ -307,11 +593,11 @@ export const ayush = [
         name: 'NATUROPATHY',
         name_id: 'naturopathy'
     },
-    {
-        id: 7,
-        name: 'Any Other',
-        name_id: 'any_other'
-    },
+    // {
+    //     id: 7,
+    //     name: 'Any Other',
+    //     name_id: 'any_other'
+    // },
 
 ]
 
@@ -440,11 +726,11 @@ export const facililites = [
         name: "Medical Tourism",
         name_id: "medical_tourism"
     },
-    {
-        id: 25,
-        name: "Any Other",
-        name_id: "other-1"
-    },
+    // {
+    //     id: 25,
+    //     name: "Any Other",
+    //     name_id: "other-1"
+    // },
 ]
 
 export const insurance = [
@@ -471,7 +757,7 @@ export const insurance = [
     },
     {
         id: 5,
-        name: "Medical Insurance Company Name",
+        name: "Medical Insurance Company Name +",
         name_id: "medical_company_name"
     },
 ]
