@@ -41,6 +41,15 @@ import Hospitals from './components/hospitals';
 import CreateHospital from './components/createHospital';
 
 const AppUniversal = function (props) {
+
+	// after login and registration api inrtegration, it need to be changed
+	const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMThlNzEwMDM0NDJiMjI0NGY2Mzc2NCIsImVtYWlsIjoiR2VyaGFyZDQ0QGdtYWlsLmNvbSIsImlhdCI6MTY1NDc3MDc1MiwiZXhwIjoxNjU1MzcwNzUyfQ.q9ifAY-duzDfu5BvqapBmmeWo5soUJL2Fa63fjczkKs'
+
+	const getToken = localStorage.getItem("accessToken")
+	!getToken && localStorage.setItem("accessToken", token)
+	// ================
+
+
 	return (
 
 		<Router basename={`${config.publicPath}`}>

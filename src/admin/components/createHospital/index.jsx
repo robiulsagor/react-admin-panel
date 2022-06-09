@@ -38,7 +38,6 @@ const CreateHospital = () => {
     }, [states])
 
     const handleStateChange = e => {
-        console.log("helo aanflash");
         setSelectedState(e.target.value)
         setAllCities()
     }
@@ -46,74 +45,9 @@ const CreateHospital = () => {
     useEffect(() => {
         if (selectedState && !allCities) {
             dispatch(getAllCities(selectedState))
-            console.log("tryinh toasoh");
         }
         setAllCities(cities)
     }, [selectedState, cities])
-
-
-    // useEffect(() => {
-    //     const getStates = async () => {
-    //         var config = {
-    //             method: 'get',
-    //             url: 'https://api.countrystatecity.in/v1/countries/IN/states',
-    //             headers: {
-    //                 'X-CSCAPI-KEY': CITY_API_KEY
-    //             }
-    //         };
-    //         await axios(config)
-    //             .then(function (response) {
-    //                 const sortedData = response.data.sort(function (a, b) {
-    //                     let fa = a.name.toLowerCase(),
-    //                         fb = b.name.toLowerCase();
-    //                     if (fa < fb) {
-    //                         return -1;
-    //                     }
-    //                     if (fa > fb) {
-    //                         return 1;
-    //                     }
-    //                     return 0;
-    //                 })
-    //                 setStates(sortedData)
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //             });
-    //     }
-    //     getStates()
-    // }, [])
-
-    // // get and set cities
-    // useEffect(() => {
-    //     if (selectedState) {
-    //         var config = {
-    //             method: 'get',
-    //             url: `https://api.countrystatecity.in/v1/countries/IN/states/${selectedState}/cities`,
-    //             headers: {
-    //                 'X-CSCAPI-KEY': CITY_API_KEY
-    //             }
-    //         };
-
-    //         axios(config)
-    //             .then(function (response) {
-    //                 const sortedData = response.data.sort(function (a, b) {
-    //                     let fa = a.name.toLowerCase(),
-    //                         fb = b.name.toLowerCase();
-    //                     if (fa < fb) {
-    //                         return -1;
-    //                     }
-    //                     if (fa > fb) {
-    //                         return 1;
-    //                     }
-    //                     return 0;
-    //                 })
-    //                 setCities(sortedData)
-    //             })
-    //             .catch(function (error) {
-    //                 console.log(error);
-    //             });
-    //     }
-    // }, [selectedState])
 
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -243,13 +177,17 @@ const CreateHospital = () => {
     }
     // =============
 
+    // const handleSpecialites = e => {
+    //     setSelectedSpecialities(oldItems => [...oldItems, e.target.value])
+    //     console.log(selectedSpecialities);
+    // }
 
     const checkEmpty = () => {
         name.length >= 9 && setNameErr(false)
         accreditation.length >= 4 && setAccreditationErr(false)
         hospitalRegi.length >= 5 && setHospitalRegiErr(false)
 
-        nodalEmail.length >= 5 && setNodalNameErr(false)
+        nodalName.length >= 5 && setNodalNameErr(false)
         nodalPhn.length >= 9 && setNodalPhnErr(false)
         nodalEmail.length >= 9 && setNodalEmailErr(false)
 
@@ -271,8 +209,8 @@ const CreateHospital = () => {
         accreditation.length >= 4 ? setAccreditationErr(false) : setAccreditationErr(true)
         healthProviderType ? setHealthProviderTypeErr(false) : setHealthProviderTypeErr(true)
         hospitalRegi.length >= 5 ? setHospitalRegiErr(false) : setHospitalRegiErr(true)
-        nodalName >= 6 ? setNodalNameErr(false) : setNodalNameErr(true)
-        nodalPhn >= 8 ? setNodalPhnErr(false) : setNodalPhnErr(true)
+        nodalName.length >= 6 ? setNodalNameErr(false) : setNodalNameErr(true)
+        nodalPhn.length >= 8 ? setNodalPhnErr(false) : setNodalPhnErr(true)
         address.length >= 8 ? setAddressErr(false) : setAddressErr(true)
         selectedState && setSelectedStateErr(false)
         selectedCity && setSelectedCityErr(false)
@@ -303,18 +241,23 @@ const CreateHospital = () => {
     const checkBoxes = () => {
         const checkSpecialities = document.querySelectorAll('input[name=specialities]:checked')
         Array.from(checkSpecialities).map(check => setSelectedSpecialities(prev => [...prev, check.value]))
+        if (selectedSpecialities.length > 0) { setSelectedSpecialitiesErr(false) }
 
         const checkAyush = document.querySelectorAll('input[name=ayush]:checked')
         Array.from(checkAyush).map(check => setSelectedAyush(prev => [...prev, check.value]))
+        if (selectedAyush.length > 0) { setSelectedAyushErr(false) }
 
         const checkFacilities = document.querySelectorAll('input[name=facilities]:checked')
         Array.from(checkFacilities).map(check => setSelectedFacilities(prev => [...prev, check.value]))
+        if (selectedFacilities.length > 0) { setSelectedFacilitesErr(false) }
 
         const checkInsurance = document.querySelectorAll('input[name=insurance]:checked')
         Array.from(checkInsurance).map(check => setSelectedInsurance(prev => [...prev, check.value]))
+        if (selectedInsurance.length > 0) { setSelectedInsuranceErr(false) }
 
         const checkCollaboration = document.querySelectorAll('input[name=collaboration]:checked')
         Array.from(checkCollaboration).map(check => setSelectedEmpanelment(prev => [...prev, check.value]))
+
     }
 
     const checkInsuranceAll = () => {
@@ -355,6 +298,7 @@ const CreateHospital = () => {
             console.log("submitted");
         } else {
             console.log('REQUIRED FIELDS MISSING IN THE FORM');
+            console.log(nameErr, typeErr, accreditationErr, healthProviderTypeErr, hospitalRegiErr, regiNoImgErr, logoErr, photosErr, nodalNameErr, nodalPhnErr, nodalEmailErr, addressErr, pinErr, telephnErr, mobileErr, primaryMailErr, establishedErr, selectedSpecialitiesErr, selectedAyushErr, selectedCityErr, selectedFacilitiesErr, selectedInsuranceErr, selectedStateErr);
         }
     }
 
@@ -396,7 +340,8 @@ const CreateHospital = () => {
 
                                         <div className="row">
                                             <div className="col-3">
-                                                <label htmlFor="hospital_name">Hospital Name:</label>
+                                                <label htmlFor="hospital_name">Hospital Name:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col">
                                                 <input type="text" name="" className="form-control" id="hospital_name" value={name} onChange={e => setName(e.target.value)} onFocus={e => setNameFocus(true)} />
@@ -422,6 +367,7 @@ const CreateHospital = () => {
                                                                 value="Private" />
                                                             <label className="custom-control-label" htmlFor="private">Private</label>
                                                         </div>
+                                                        <span className='text-danger'>*</span>
                                                     </div>
                                                     {((submitted) && typeErr) && <span className='text-danger mt-2'>Please select Hospital Type</span>}
                                                 </div>
@@ -433,7 +379,7 @@ const CreateHospital = () => {
                                                 <label htmlFor="accreditation">
                                                     Accreditation <br />
                                                     (For e.g NABH/NABL/JCI/ISO/Others) <br />
-                                                    (For Hospital/Blood Bank/Laboratory):
+                                                    (For Hospital/Blood Bank/Laboratory):    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col-3">
@@ -445,7 +391,7 @@ const CreateHospital = () => {
 
                                         <div className="row mt-4">
                                             <div className="col-3">
-                                                <label>Health Care Provider Type:</label>
+                                                <label>Health Care Provider Type:    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col">
 
@@ -468,7 +414,7 @@ const CreateHospital = () => {
 
                                         <div className="row mt-4">
                                             <div className="col-3">
-                                                <label htmlFor="regi_no">Hospital Registration No.:</label>
+                                                <label htmlFor="regi_no">Hospital Registration No.:     <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-6">
                                                 <input type="text" className='form-control' id="regi_no" value={hospitalRegi} onChange={e => setHospitalRegi(e.target.value)} onFocus={e => setHospitalRegiFocus(true)} />
@@ -481,7 +427,8 @@ const CreateHospital = () => {
 
                                         <div className="row mt-4">
                                             <div className="col-3">
-                                                <label htmlFor="regi_scan_copy">Registration No. Scanned Copy:</label>
+                                                <label htmlFor="regi_scan_copy">Registration No. Scanned Copy:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-6">
                                                 <div className="custom-file">
@@ -489,7 +436,7 @@ const CreateHospital = () => {
                                                     <label className="custom-file-label" htmlFor="customFile">Choose file</label>
                                                 </div>
                                                 <div>
-                                                    {(submitted && regiNoImgErr) && <span className='text-danger mt-2'>Please upload Registration Scanned Copy</span>}
+                                                    {(submitted && regiNoImgErr) && <span className='text-danger mt-2'>Please upload Registration Scanned Copy:     <span className='text-danger'>*</span></span>}
                                                 </div>
                                             </div>
                                         </div>
@@ -498,6 +445,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="logo">
                                                     Logo (only JPG, GIF, PNG with max size: 4MB allowed):
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col-6">
@@ -514,7 +462,7 @@ const CreateHospital = () => {
                                         <div className="row mt-4">
                                             <div className="col-3">
                                                 <label htmlFor="photo">
-                                                    Photos (only JPG, GIF, PNG with max size: 4MB allowed):
+                                                    Photos (only JPG, GIF, PNG with max size: 4MB allowed):    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col-6">
@@ -546,6 +494,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="nodal_name">
                                                     Nodal Person for this Information - Name and Designation:
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col">
@@ -553,6 +502,7 @@ const CreateHospital = () => {
                                                 <div>
                                                     {((submitted || nodalNameFocus) && nodalNameErr) && <span className='text-danger mt-2'> Please enter Nodal Name and Designation</span>}
                                                 </div>
+
                                             </div>
 
                                         </div>
@@ -561,6 +511,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="nodal_phone">
                                                     Telephone Number of the Nodal Person for this Information:
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col">
@@ -576,6 +527,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="nodal_email">
                                                     Nodal Person Email Id:
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className="col">
@@ -594,7 +546,7 @@ const CreateHospital = () => {
                                 <div className="card mt-5">
                                     <div className="card-header text-center">
                                         <h6 className="strong">
-                                            Hospital Address
+                                            Hospital Address:
                                         </h6>
                                     </div>
 
@@ -602,7 +554,8 @@ const CreateHospital = () => {
 
                                         <div className="row mt-3">
                                             <div className="col-3">
-                                                <label htmlFor="address">Address</label>
+                                                <label htmlFor="address">Address:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-5">
                                                 <textarea className="form-control" id="" cols="30" rows="5"
@@ -615,7 +568,8 @@ const CreateHospital = () => {
 
                                         <div className="row mt-3">
                                             <div className="col-3">
-                                                <label htmlFor="state">State:</label>
+                                                <label htmlFor="state">State:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-5">
                                                 <select className="custom-select" value={selectedState}
@@ -631,14 +585,16 @@ const CreateHospital = () => {
                                                     })}
                                                 </select>
                                                 <div>
-                                                    {(submitted && selectedStateErr) && <span className='text-danger mt-2'>Please select your state.</span>}
+                                                    {(submitted && selectedStateErr) && <span className='text-danger mt-2'>Please select your state:
+                                                        <span className='text-danger'>*</span></span>}
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div className="row mt-3">
                                             <div className="col-3">
-                                                <label htmlFor="district">City</label>
+                                                <label htmlFor="district">City:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-5">
 
@@ -659,7 +615,8 @@ const CreateHospital = () => {
 
                                         <div className="row mt-3">
                                             <div className="col-3">
-                                                <label htmlFor="pin">Pin</label>
+                                                <label htmlFor="pin">Pin:
+                                                    <span className='text-danger'>*</span></label>
                                             </div>
                                             <div className="col-5">
                                                 <input type="text" className="form-control" id="pin" value={pin} onChange={e => setPin(e.target.value)} onFocus={e => setPinFocus(true)} />
@@ -686,6 +643,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="tele_phone">
                                                     Telephone/Landline (STD + NUMBER):
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className='col-5'>
@@ -708,6 +666,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="mobile_no">
                                                     Mobile No.:
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className='col-5'>
@@ -768,6 +727,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="primary_email">
                                                     Hospital Primary Email Id:
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className='col-5'>
@@ -806,6 +766,7 @@ const CreateHospital = () => {
                                             <div className="col-3">
                                                 <label htmlFor="year">
                                                     Established Since (Year):
+                                                    <span className='text-danger'>*</span>
                                                 </label>
                                             </div>
                                             <div className='col-5'>
@@ -845,7 +806,8 @@ const CreateHospital = () => {
                                 {/* CARD SPECIALITIES*/}
                                 <div className="card mt-5" >
                                     <div className="card-header text-center">
-                                        <h5 className="strong">SPECIALITIES</h5>
+                                        <h5 className="strong">SPECIALITIES <span className='text-danger'>*</span></h5>
+
                                     </div>
 
                                     <div className="card-body">
@@ -874,7 +836,8 @@ const CreateHospital = () => {
                                 {/* CARD AYUSH */}
                                 <div className="card mt-5" >
                                     <div className="card-header text-center">
-                                        <h5 className="strong">AYUSH</h5>
+                                        <h5 className="strong">AYUSH
+                                            <span className='text-danger'>*</span></h5>
                                     </div>
 
                                     <div className="card-body">
@@ -902,7 +865,8 @@ const CreateHospital = () => {
                                 {/* CARD FACILITIES */}
                                 <div className="card mt-5" >
                                     <div className="card-header text-center">
-                                        <h5 className="strong">FACILITIES</h5>
+                                        <h5 className="strong">FACILITIES
+                                            <span className='text-danger'>*</span></h5>
                                     </div>
 
                                     <div className="card-body">
@@ -932,7 +896,8 @@ const CreateHospital = () => {
                                 {/* CARD = MEDACAL INSURANCE */}
                                 <div className="card mt-5" >
                                     <div className="card-header text-center">
-                                        <h5 className="strong">MEDACAL INSURANCE</h5>
+                                        <h5 className="strong">MEDACAL INSURANCE
+                                            <span className='text-danger'>*</span></h5>
                                     </div>
 
                                     <div className="card-body">
@@ -1077,6 +1042,10 @@ const CreateHospital = () => {
                                 </div>
 
                                 <div className="card">
+                                    {selectedAyush}
+                                    {selectedFacilities}
+                                    {selectedInsurance}
+                                    {selectedSpecialities}
                                     <div className="card-body text-center">
                                         <div >
                                             <button type='submit' className='btn btn-primary' style={{ margin: '0 10px' }}>Submit</button>

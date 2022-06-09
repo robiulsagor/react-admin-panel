@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { Table, Switch } from "antd";
 import { Link } from 'react-router-dom';
 import SidebarNav from "../sidebar";
@@ -15,99 +15,124 @@ import IMG06 from "../../assets/images/doctors/doctor-thumb-02.jpg";
 import IMG07 from "../../assets/images/doctors/doctor-thumb-03.jpg";
 import IMG08 from "../../assets/images/doctors/doctor-thumb-04.jpg";
 import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllHospitals } from "../../../features/hospitalList/hospitalListSllice";
 
 const Hospitals = () => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getAllHospitals())
+    }, [])
+
     const [startDate, setStartDate] = useState(new Date())
     const [show, setShow] = useState(null)
-    const data = [
-        {
-            id: 1,
-            image: IMG01,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "11.00 AM",
-            status: false,
-        },
-        {
-            id: 2,
-            image: IMG02,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "02.00 AM",
-            Amount: "$3200.00",
-            status: true,
-        },
-        {
-            id: 3,
-            image: IMG03,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "11.00 AM",
-            Amount: "$3200.00",
-            status: false,
-        },
-        {
-            id: 4,
-            image: IMG04,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "06.00 AM",
-            Amount: "$3200.00",
-            status: true,
-        },
-        {
-            id: 5,
-            image: IMG05,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "10.00 AM",
-            Amount: "$3200.00",
-            status: false,
-        },
-        {
-            id: 6,
-            image: IMG06,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "05.00 AM",
-            Amount: "$3200.00",
-            status: false,
-        },
-        {
-            id: 7,
-            image: IMG07,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "08.00 AM",
-            Amount: "$3200.00",
-            status: true,
-        },
-        {
-            id: 8,
-            image: IMG08,
-            HospitalName: "Dr. Darren Elder",
-            Address: "abcd",
-            DailyAppointments: 5,
-            Members: "9 Nov 2019",
-            Time: "09.00 AM",
-            Amount: "$3200.00",
-            status: false,
-        },
-    ]
+
+    // get the hospital details from redux store
+    const getData = useSelector(state => state.hospitalList.hospitals)
+
+    const data = getData.map((d, index) => {
+        var date = new Date(d.createdAt)
+        date = date.toLocaleString()
+        const dateSpllit = date.split(",")
+
+        return (
+            { id: d.id, image: IMG01, HospitalName: d.name, Address: d.address, DailyAppointments: d.totalDailyAppointments, Members: dateSpllit[0], Time: dateSpllit[1], status: d.isActive }
+        )
+    })
+
+    console.log(data);
+
+
+    // const data = [
+    //     {
+    //         id: 1,
+    //         image: IMG01,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "11.00 AM",
+    //         status: false,
+    //     },
+    //     {
+    //         id: 2,
+    //         image: IMG02,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "02.00 AM",
+    //         Amount: "$3200.00",
+    //         status: true,
+    //     },
+    //     {
+    //         id: 3,
+    //         image: IMG03,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "11.00 AM",
+    //         Amount: "$3200.00",
+    //         status: false,
+    //     },
+    //     {
+    //         id: 4,
+    //         image: IMG04,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "06.00 AM",
+    //         Amount: "$3200.00",
+    //         status: true,
+    //     },
+    //     {
+    //         id: 5,
+    //         image: IMG05,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "10.00 AM",
+    //         Amount: "$3200.00",
+    //         status: false,
+    //     },
+    //     {
+    //         id: 6,
+    //         image: IMG06,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "05.00 AM",
+    //         Amount: "$3200.00",
+    //         status: false,
+    //     },
+    //     {
+    //         id: 7,
+    //         image: IMG07,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "08.00 AM",
+    //         Amount: "$3200.00",
+    //         status: true,
+    //     },
+    //     {
+    //         id: 8,
+    //         image: IMG08,
+    //         HospitalName: "Dr. Darren Elder",
+    //         Address: "abcd",
+    //         DailyAppointments: 5,
+    //         Members: "9 Nov 2019",
+    //         Time: "09.00 AM",
+    //         Amount: "$3200.00",
+    //         status: false,
+    //     },
+    // ]
 
 
     const handleClose = () => {
@@ -144,7 +169,7 @@ const Hospitals = () => {
         },
 
         {
-            title: "Daily_Appointments",
+            title: "Daily Appointments",
             dataIndex: "DailyAppointments",
         },
         {
@@ -172,7 +197,6 @@ const Hospitals = () => {
             render: (e) => (
                 <Switch onChange={onChangeHandle} defaultChecked={e} />
             ),
-            sorter: (a, b) => a.leavetype.length - b.leavetype.length,
         },
         {
             title: 'Actions',

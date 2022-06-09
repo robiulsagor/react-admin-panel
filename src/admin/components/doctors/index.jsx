@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, Switch } from "antd";
 import { Link } from 'react-router-dom';
 import SidebarNav from "../sidebar";
@@ -15,107 +15,130 @@ import IMG06 from "../../assets/images/doctors/doctor-thumb-02.jpg";
 import IMG07 from "../../assets/images/doctors/doctor-thumb-03.jpg";
 import IMG08 from "../../assets/images/doctors/doctor-thumb-04.jpg";
 import { Modal } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllDoctors } from "../../../features/doctorList/doctorListSlice";
 
 const Doctors = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllDoctors())
+  }, [])
+
+
+  // get the hospital details from redux store
+  const getData = useSelector(state => state.doctorList.doctors)
+
+  const data = getData.map((d, index) => {
+    var date = new Date(d.createdAt)
+    date = date.toLocaleString()
+    const dateSpllit = date.split(",")
+
+    return (
+      { id: d.id, image: IMG01, Name: d.name, Address: d.address, Speciality: d.speciality, DailyAppointments: 0, Members: dateSpllit[0], Time: dateSpllit[1], Amount: '$200', status: d.isActive }
+    )
+  })
+
+
   const [show, setShow] = useState(null)
-  const data = [
-    {
-      id: 1,
-      image: IMG01,
-      Name: "Dr. Darren Elder",
-      Hospital: "abc",
-      Speciality: "Urology",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "11.00 AM",
-      Amount: "$3200.00",
-      status: false,
-    },
-    {
-      id: 2,
-      image: IMG02,
-      Name: "Dr. John Gibbs",
-      Hospital: "abc",
-      Speciality: "Cardiology",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "02.00 AM",
-      Amount: "$3200.00",
-      status: true,
-    },
-    {
-      id: 3,
-      image: IMG03,
-      Name: "Dr. Linda Tobin",
-      Hospital: "abc",
-      Speciality: "Orthopaedics",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "11.00 AM",
-      Amount: "$3200.00",
-      status: false,
-    },
-    {
-      id: 4,
-      image: IMG04,
-      Name: "Dr. Sofia Brient",
-      Hospital: "abc",
-      Speciality: "Orthopaedics",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "06.00 AM",
-      Amount: "$3200.00",
-      status: true,
-    },
-    {
-      id: 5,
-      image: IMG05,
-      Name: "Dr. Ruby Perrin",
-      Hospital: "abc",
-      Speciality: "Dental",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "10.00 AM",
-      Amount: "$3200.00",
-      status: false,
-    },
-    {
-      id: 6,
-      image: IMG06,
-      Name: "Dr. Katharine Berthold",
-      Hospital: "abc",
-      Speciality: "Neurology",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "05.00 AM",
-      Amount: "$3200.00",
-      status: false,
-    },
-    {
-      id: 7,
-      image: IMG07,
-      Name: "Dr. Ruby Perrin",
-      Hospital: "abc",
-      Speciality: "Dental",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "08.00 AM",
-      Amount: "$3200.00",
-      status: true,
-    },
-    {
-      id: 8,
-      image: IMG08,
-      Name: "Dr. Deborah Angel",
-      Hospital: "abc",
-      Speciality: "Dermatology",
-      DailyAppointments: 5,
-      Members: "9 Nov 2019",
-      Time: "09.00 AM",
-      Amount: "$3200.00",
-      status: false,
-    },
-  ]
+  // const data = [
+  //   {
+  //     id: 1,
+  //     image: IMG01,
+  //     Name: "Dr. Darren Elder",
+  //     Hospital: "abc",
+  //     Speciality: "Urology",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "11.00 AM",
+  //     Amount: "$3200.00",
+  //     status: false,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: IMG02,
+  //     Name: "Dr. John Gibbs",
+  //     Hospital: "abc",
+  //     Speciality: "Cardiology",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "02.00 AM",
+  //     Amount: "$3200.00",
+  //     status: true,
+  //   },
+  //   {
+  //     id: 3,
+  //     image: IMG03,
+  //     Name: "Dr. Linda Tobin",
+  //     Hospital: "abc",
+  //     Speciality: "Orthopaedics",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "11.00 AM",
+  //     Amount: "$3200.00",
+  //     status: false,
+  //   },
+  //   {
+  //     id: 4,
+  //     image: IMG04,
+  //     Name: "Dr. Sofia Brient",
+  //     Hospital: "abc",
+  //     Speciality: "Orthopaedics",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "06.00 AM",
+  //     Amount: "$3200.00",
+  //     status: true,
+  //   },
+  //   {
+  //     id: 5,
+  //     image: IMG05,
+  //     Name: "Dr. Ruby Perrin",
+  //     Hospital: "abc",
+  //     Speciality: "Dental",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "10.00 AM",
+  //     Amount: "$3200.00",
+  //     status: false,
+  //   },
+  //   {
+  //     id: 6,
+  //     image: IMG06,
+  //     Name: "Dr. Katharine Berthold",
+  //     Hospital: "abc",
+  //     Speciality: "Neurology",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "05.00 AM",
+  //     Amount: "$3200.00",
+  //     status: false,
+  //   },
+  //   {
+  //     id: 7,
+  //     image: IMG07,
+  //     Name: "Dr. Ruby Perrin",
+  //     Hospital: "abc",
+  //     Speciality: "Dental",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "08.00 AM",
+  //     Amount: "$3200.00",
+  //     status: true,
+  //   },
+  //   {
+  //     id: 8,
+  //     image: IMG08,
+  //     Name: "Dr. Deborah Angel",
+  //     Hospital: "abc",
+  //     Speciality: "Dermatology",
+  //     DailyAppointments: 5,
+  //     Members: "9 Nov 2019",
+  //     Time: "09.00 AM",
+  //     Amount: "$3200.00",
+  //     status: false,
+  //   },
+  // ]
 
   const handleClose = () => {
     setShow(false)
