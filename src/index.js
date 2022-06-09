@@ -8,14 +8,16 @@ import AppRouter from './approuter';
 // boostrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 //fontawesome
-import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 import 'react-image-lightbox/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 //carousel
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Provider } from 'react-redux';
+import store from './app/store'
 
-if(!window.location.pathname.includes("admin") && !window.location.pathname.includes("pharmacyadmin")) {
+if (!window.location.pathname.includes("admin") && !window.location.pathname.includes("pharmacyadmin")) {
     require('./client/assets/css/all.css')
     require('./client/assets/css/all.min.css')
     require('./client/assets/css/fontawesome.min.css')
@@ -30,8 +32,12 @@ if(!window.location.pathname.includes("admin") && !window.location.pathname.incl
 }
 
 
-ReactDOM.render(<AppRouter/>, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <AppRouter />
+    </Provider>
+    , document.getElementById('root'));
 
 if (module.hot) { // enables hot module replacement if plugin is installed
- module.hot.accept();
+    module.hot.accept();
 }

@@ -6,6 +6,8 @@ import Sidebar from '../sidebar'
 import { healthCareType, specialities, ayush, facililites, insurance } from '../../data'
 import Flag from '../../assets/images/flag-48.png'
 import axios from 'axios'
+import { getAllCities, getAllStates } from '../../../features/hospitalRegister/hospitalRegiSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const CreateHospital = () => {
@@ -13,78 +15,105 @@ const CreateHospital = () => {
     const [submitted, setSubmitted] = useState(false)
     const [isAllOk, setIsAllOk] = useState(false)
 
-    const [states, setStates] = useState([])
+    const [allStates, setAllStates] = useState([])
     const [selectedState, setSelectedState] = useState('')
     const [selectedStateErr, setSelectedStateErr] = useState(true)
 
 
-    const [cities, setCities] = useState([])
+    const [allCities, setAllCities] = useState([])
     const [selectedCity, setSelectedCity] = useState('')
     const [selectedCityErr, setSelectedCityErr] = useState(true)
 
-    // get and set states
-    useEffect(() => {
-        const getStates = async () => {
-            var config = {
-                method: 'get',
-                url: 'https://api.countrystatecity.in/v1/countries/IN/states',
-                headers: {
-                    'X-CSCAPI-KEY': CITY_API_KEY
-                }
-            };
-            await axios(config)
-                .then(function (response) {
-                    const sortedData = response.data.sort(function (a, b) {
-                        let fa = a.name.toLowerCase(),
-                            fb = b.name.toLowerCase();
-                        if (fa < fb) {
-                            return -1;
-                        }
-                        if (fa > fb) {
-                            return 1;
-                        }
-                        return 0;
-                    })
-                    setStates(sortedData)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
-        getStates()
-    }, [])
+    // get and set states------------------
 
-    // get and set cities
-    useEffect(() => {
-        if (selectedState) {
-            var config = {
-                method: 'get',
-                url: `https://api.countrystatecity.in/v1/countries/IN/states/${selectedState}/cities`,
-                headers: {
-                    'X-CSCAPI-KEY': CITY_API_KEY
-                }
-            };
+    const { states, cities, isLoading } = useSelector(state => state.hospitalRegi)
 
-            axios(config)
-                .then(function (response) {
-                    const sortedData = response.data.sort(function (a, b) {
-                        let fa = a.name.toLowerCase(),
-                            fb = b.name.toLowerCase();
-                        if (fa < fb) {
-                            return -1;
-                        }
-                        if (fa > fb) {
-                            return 1;
-                        }
-                        return 0;
-                    })
-                    setCities(sortedData)
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        if (allStates.length === 0) {
+            dispatch(getAllStates())
+            setAllStates(states)
         }
-    }, [selectedState])
+    }, [states])
+
+    const handleStateChange = e => {
+        console.log("helo aanflash");
+        setSelectedState(e.target.value)
+        setAllCities()
+    }
+
+    useEffect(() => {
+        if (selectedState && !allCities) {
+            dispatch(getAllCities(selectedState))
+            console.log("tryinh toasoh");
+        }
+        setAllCities(cities)
+    }, [selectedState, cities])
+
+
+    // useEffect(() => {
+    //     const getStates = async () => {
+    //         var config = {
+    //             method: 'get',
+    //             url: 'https://api.countrystatecity.in/v1/countries/IN/states',
+    //             headers: {
+    //                 'X-CSCAPI-KEY': CITY_API_KEY
+    //             }
+    //         };
+    //         await axios(config)
+    //             .then(function (response) {
+    //                 const sortedData = response.data.sort(function (a, b) {
+    //                     let fa = a.name.toLowerCase(),
+    //                         fb = b.name.toLowerCase();
+    //                     if (fa < fb) {
+    //                         return -1;
+    //                     }
+    //                     if (fa > fb) {
+    //                         return 1;
+    //                     }
+    //                     return 0;
+    //                 })
+    //                 setStates(sortedData)
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+    //             });
+    //     }
+    //     getStates()
+    // }, [])
+
+    // // get and set cities
+    // useEffect(() => {
+    //     if (selectedState) {
+    //         var config = {
+    //             method: 'get',
+    //             url: `https://api.countrystatecity.in/v1/countries/IN/states/${selectedState}/cities`,
+    //             headers: {
+    //                 'X-CSCAPI-KEY': CITY_API_KEY
+    //             }
+    //         };
+
+    //         axios(config)
+    //             .then(function (response) {
+    //                 const sortedData = response.data.sort(function (a, b) {
+    //                     let fa = a.name.toLowerCase(),
+    //                         fb = b.name.toLowerCase();
+    //                     if (fa < fb) {
+    //                         return -1;
+    //                     }
+    //                     if (fa > fb) {
+    //                         return 1;
+    //                     }
+    //                     return 0;
+    //                 })
+    //                 setCities(sortedData)
+    //             })
+    //             .catch(function (error) {
+    //                 console.log(error);
+    //             });
+    //     }
+    // }, [selectedState])
 
     const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -590,10 +619,10 @@ const CreateHospital = () => {
                                             </div>
                                             <div className="col-5">
                                                 <select className="custom-select" value={selectedState}
-                                                    onChange={e => e.target.value !== "0" && setSelectedState(e.target.value)}>
+                                                    onChange={handleStateChange}>
                                                     <option value="0">Select State</option>
 
-                                                    {states.map((data) => {
+                                                    {allStates.map(data => {
                                                         return (
                                                             <>
                                                                 <option value={data.iso2} key={data.id}>{data.name}</option>
@@ -616,7 +645,7 @@ const CreateHospital = () => {
                                                 <select className="custom-select" id='city' value={selectedCity}
                                                     onChange={e => e.target.value !== "0" && setSelectedCity(e.target.value)}>
                                                     <option value="0">Select City</option>
-                                                    {cities.map(data => {
+                                                    {allCities && allCities.map(data => {
                                                         return (
                                                             <option key={data.id} value={data.name}>{data.name}</option>
                                                         )

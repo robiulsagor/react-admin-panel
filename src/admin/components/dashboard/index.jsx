@@ -6,13 +6,13 @@ import TableDoctor from './tableDoctor';
 import TablePatientsList from './tablePatientList';
 import TableAppointmentList from './appointment';
 
-class Dashboard extends Component{
-    render(){
-        return(
-            <>
-             <SidebarNav />
-            <div className="page-wrapper">
-			    <div className="content container-fluid">
+const Dashboard = () => {
+
+	return (
+		<>
+			<SidebarNav />
+			<div className="page-wrapper">
+				<div className="content container-fluid">
 					<div className="page-header">
 						<div className="row">
 							<div className="col-sm-12">
@@ -23,10 +23,10 @@ class Dashboard extends Component{
 							</div>
 						</div>
 					</div>
-             
-                   {/* breadcrumb */}
 
-                 <div className="row">
+					{/* breadcrumb */}
+
+					<div className="row">
 						<div className="col-xl-3 col-sm-6 col-12">
 							<div className="card">
 								<div className="card-body">
@@ -59,7 +59,7 @@ class Dashboard extends Component{
 										</div>
 									</div>
 									<div className="dash-widget-info">
-										
+
 										<h6 className="text-muted">Patients</h6>
 										<div className="progress progress-sm">
 											<div className="progress-bar bg-success w-50"></div>
@@ -80,7 +80,7 @@ class Dashboard extends Component{
 										</div>
 									</div>
 									<div className="dash-widget-info">
-										
+
 										<h6 className="text-muted">Appointment</h6>
 										<div className="progress progress-sm">
 											<div className="progress-bar bg-danger w-50"></div>
@@ -101,7 +101,7 @@ class Dashboard extends Component{
 										</div>
 									</div>
 									<div className="dash-widget-info">
-										
+
 										<h6 className="text-muted">Revenue</h6>
 										<div className="progress progress-sm">
 											<div className="progress-bar bg-warning w-50"></div>
@@ -113,8 +113,8 @@ class Dashboard extends Component{
 					</div>
 					<div className="row">
 						<div className="col-md-12 col-lg-6">
-							 {/* Sales Chart */}
-							 <div className="card card-chart">
+							{/* Sales Chart */}
+							<div className="card card-chart">
 								<div className="card-header">
 									<h4 className="card-title">Revenue</h4>
 								</div>
@@ -122,11 +122,11 @@ class Dashboard extends Component{
 									<RevenueChart />
 								</div>
 							</div>
-						   {/* /Sales Chart */}
+							{/* /Sales Chart */}
 						</div>
 						<div className="col-md-12 col-lg-6">
-							 {/* Sales Chart */}
-							 <div className="card card-chart">
+							{/* Sales Chart */}
+							<div className="card card-chart">
 								<div className="card-header">
 									<h4 className="card-title">Revenue</h4>
 								</div>
@@ -134,14 +134,14 @@ class Dashboard extends Component{
 									<StatusChart />
 								</div>
 							</div>
-						   {/* /Sales Chart */}
+							{/* /Sales Chart */}
 						</div>
-						</div>
+					</div>
 					{/*  row */}
 					<div className="row">
 						<div className="col-md-6 col-lg-6">
 							<div className="card card-table flex-fill">
-							<div className="card-header">
+								<div className="card-header">
 									<h4 className="card-title">Doctors List</h4>
 								</div>
 								<div className="card-body">
@@ -151,7 +151,7 @@ class Dashboard extends Component{
 						</div>
 						<div className="col-md-6 col-lg-6">
 							<div className="card card-table flex-fill">
-							<div className="card-header">
+								<div className="card-header">
 									<h4 className="card-title">Patients List</h4>
 								</div>
 								<div className="card-body">
@@ -159,19 +159,19 @@ class Dashboard extends Component{
 								</div>
 							</div>
 						</div>
-					</div>	
+					</div>
 					<div className="row">
 						<div className="col-md-12 col-lg-12">
 							<div className="card card-table flex-fill">
-									<TableAppointmentList />
+								<TableAppointmentList />
 							</div>
 						</div>
-					</div>	
-			     </div> 
-             </div>
-             </>         
-        )
-     }
-  }
-  
- export default Dashboard; 
+					</div>
+				</div>
+			</div>
+		</>
+	)
+}
+
+
+export default Dashboard; 

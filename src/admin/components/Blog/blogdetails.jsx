@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {IMG01,DoctorThumb02,patient3,patient4,patient5,patient6,patient7} from './image'
 import SidebarNav from '../sidebar';
 
-class BlogDetails extends Component {
-   render() {
+const BlogDetails =()=> {
+   
       return (        
         <>
         <SidebarNav />
@@ -215,6 +215,5 @@ class BlogDetails extends Component {
        </>
       );
    }
-}
 
 export default BlogDetails;
