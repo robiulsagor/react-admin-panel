@@ -1,4 +1,6 @@
 import React, { Component, useEffect } from "react";
+import { useDispatch } from "react-redux"
+
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 import logoicon from "../../assets/images/logo-small.png";
@@ -8,6 +10,7 @@ import $ from "jquery";
 import IMG01 from "../../assets/images/doctors/doctor-thumb-01.jpg";
 import IMG02 from "../../assets/images/doctors/doctor-thumb-02.jpg";
 import IMG03 from "../../assets/images/doctors/doctor-thumb-03.jpg";
+import { logout } from "../../../features/auth/authSlice";
 
 
 const Header = () => {
@@ -15,6 +18,13 @@ const Header = () => {
 
   const location = useLocation().pathname
   const pathname = location.split(['/'])[1]
+
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+    console.log("logout");
+  }
 
   useEffect(() => {
     var Sidemenu = function () {
@@ -205,7 +215,7 @@ const Header = () => {
               </Dropdown.Item>
               <Dropdown.Item href="/admin/profile"> My Profile</Dropdown.Item>
               <Dropdown.Item href="/admin/settings">Settings</Dropdown.Item>
-              <Dropdown.Item href="/admin">Logout</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </li>

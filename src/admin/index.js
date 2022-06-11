@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
+import store from '../app/store'
+
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+let persistor = persistStore(store);
 
 // boostrap
 
@@ -10,7 +16,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/app.css';
 import './assets/css/select2.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'font-awesome/css/font-awesome.min.css'; 
+import 'font-awesome/css/font-awesome.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import './assets/css/fontawesome.min.css';
 import './assets/css/feathericon.min.css';
@@ -18,10 +24,11 @@ import './assets/js/select2.min.js';
 import './assets/js/script.js';
 //style
 
-import {$,jQuery} from 'jquery';
+import { $, jQuery } from 'jquery';
 // export for others scripts to use
 window.$ = $;
 window.jQuery = jQuery;
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

@@ -4,6 +4,13 @@ import ReactDOM from 'react-dom';
 import AppRouter from './approuter';
 // import * as serviceWorker from './client/serviceWorker';
 
+import { Provider } from "react-redux"
+import store from './app/store'
+
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
+let persistor = persistStore(store);
+
 
 // boostrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,8 +21,7 @@ import "react-datepicker/dist/react-datepicker.css";
 //carousel
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Provider } from 'react-redux';
-import store from './app/store'
+
 
 if (!window.location.pathname.includes("admin") && !window.location.pathname.includes("pharmacyadmin")) {
     require('./client/assets/css/all.css')
@@ -34,7 +40,9 @@ if (!window.location.pathname.includes("admin") && !window.location.pathname.inc
 
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouter />
+        <PersistGate loading={null} persistor={persistor}>
+            <AppRouter />
+        </PersistGate>
     </Provider>
     , document.getElementById('root'));
 

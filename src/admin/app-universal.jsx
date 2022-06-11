@@ -40,60 +40,54 @@ import AddDoctor from './components/adddoctor';
 import Hospitals from './components/hospitals';
 import CreateHospital from './components/createHospital';
 
+import ProtectedRoute from './ProtectedRoute'
+
+
 const AppUniversal = function (props) {
-
-	// after login and registration api inrtegration, it need to be changed
-	const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMThlNzEwMDM0NDJiMjI0NGY2Mzc2NCIsImVtYWlsIjoiR2VyaGFyZDQ0QGdtYWlsLmNvbSIsImlhdCI6MTY1NDc3MDc1MiwiZXhwIjoxNjU1MzcwNzUyfQ.q9ifAY-duzDfu5BvqapBmmeWo5soUJL2Fa63fjczkKs'
-
-	const getToken = localStorage.getItem("accessToken")
-	!getToken && localStorage.setItem("accessToken", token)
-	// ================
-
 
 	return (
 
 		<Router basename={`${config.publicPath}`}>
 			<div className="main-wrapper">
-
-
 				<Route render={(props) => <Header {...props} />} />
+
 				<Switch>
-					<Route path="/admin" exact component={Dashboard} />
-					<Route path="/admin/appointment-list" exact component={Appointments} />
-					<Route path="/admin/specialities" exact component={Specialities} />
-					<Route path="/admin/hospital-list" exact component={Hospitals} />
-					<Route path="/admin/hospital-list/create-hospital" exact component={CreateHospital} />
-					<Route path="/admin/doctor-list" exact component={Doctors} />
-					<Route path="/admin/doctor-list/add-doctor" exact component={AddDoctor} />
-					<Route path="/admin/patient-list" exact component={Patients} />
-					<Route path="/admin/reviews" exact component={Reviews} />
-					<Route path="/admin/profile" exact component={Profile} />
-					<Route path="/admin/transactions-list" exact component={Transaction} />
-					<Route path="/admin/settings" exact component={Settings} />
-					<Route path="/admin/invoice-report" exact component={InvoiceReport} />
-					<Route path="/admin/blog" exact component={Blog} />
-					<Route path="/admin/blog-details" exact component={BlogDetails} />
-					<Route path="/admin/add-blog" exact component={AddBlog} />
-					<Route path="/admin/edit-blog" exact component={EditBlog} />
-					<Route path="/admin/pending-blog" exact component={PendingBlog} />
-					<Route path="/admin/product-list" exact component={ProductList} />
-					<Route path="/admin/pharmacy-list" exact component={PharmacyList} />
-					<Route path="/admin/invoice" exact component={Invoice} />
+					<ProtectedRoute path="/admin" exact component={Dashboard} />
+					<ProtectedRoute path="/admin/appointment-list" exact component={Appointments} />
+					<ProtectedRoute path="/admin/specialities" exact component={Specialities} />
+					<ProtectedRoute path="/admin/hospital-list" exact component={Hospitals} />
+					<ProtectedRoute path="/admin/hospital-list/create-hospital" exact component={CreateHospital} />
+					<ProtectedRoute path="/admin/doctor-list" exact component={Doctors} />
+					<ProtectedRoute path="/admin/doctor-list/add-doctor" exact component={AddDoctor} />
+					<ProtectedRoute path="/admin/patient-list" exact component={Patients} />
+					<ProtectedRoute path="/admin/reviews" exact component={Reviews} />
+					<ProtectedRoute path="/admin/profile" exact component={Profile} />
+					<ProtectedRoute path="/admin/transactions-list" exact component={Transaction} />
+					<ProtectedRoute path="/admin/settings" exact component={Settings} />
+					<ProtectedRoute path="/admin/invoice-report" exact component={InvoiceReport} />
+					<ProtectedRoute path="/admin/blog" exact component={Blog} />
+					<ProtectedRoute path="/admin/blog-details" exact component={BlogDetails} />
+					<ProtectedRoute path="/admin/add-blog" exact component={AddBlog} />
+					<ProtectedRoute path="/admin/edit-blog" exact component={EditBlog} />
+					<ProtectedRoute path="/admin/pending-blog" exact component={PendingBlog} />
+					<ProtectedRoute path="/admin/product-list" exact component={ProductList} />
+					<ProtectedRoute path="/admin/pharmacy-list" exact component={PharmacyList} />
+					<ProtectedRoute path="/admin/invoice" exact component={Invoice} />
 					<Route path="/admin/login" exact component={Login} />
 					<Route path="/admin/register" exact component={Register} />
-					<Route path="/admin/forgotPassword" exact component={ForgotPassword} />
-					<Route path="/admin/lockscreen" exact component={Lockscreen} />
-					<Route path="/admin/404" exact component={Error} />
-					<Route path="/admin/500" exact component={ErrorPage} />
-					<Route path="/admin/blank-page" exact component={BlankPage} />
-					<Route path="/admin/components" exact component={Components} />
-					<Route path="/admin/basic-input" exact component={BasicInput} />
-					<Route path="/admin/form-input-group" exact component={FormInput} />
-					<Route path="/admin/form-horizontal" exact component={FormHorizontal} />
-					<Route path="/admin/form-mask" exact component={FormMask} />
-					<Route path="/admin/form-validation" exact component={FormValidation} />
-					<Route path="/admin/tables-basic" exact component={BasicTables} />
-					<Route path="/admin/data-tables" exact component={DataTables} />
+					<ProtectedRoute path="/admin/forgotPassword" exact component={ForgotPassword} />
+					<ProtectedRoute path="/admin/lockscreen" exact component={Lockscreen} />
+					<ProtectedRoute path="/admin/404" exact component={Error} />
+					<ProtectedRoute path="/admin/500" exact component={ErrorPage} />
+					<ProtectedRoute path="/admin/blank-page" exact component={BlankPage} />
+					<ProtectedRoute path="/admin/components" exact component={Components} />
+					<ProtectedRoute path="/admin/basic-input" exact component={BasicInput} />
+					<ProtectedRoute path="/admin/form-input-group" exact component={FormInput} />
+					<ProtectedRoute path="/admin/form-horizontal" exact component={FormHorizontal} />
+					<ProtectedRoute path="/admin/form-mask" exact component={FormMask} />
+					<ProtectedRoute path="/admin/form-validation" exact component={FormValidation} />
+					<ProtectedRoute path="/admin/tables-basic" exact component={BasicTables} />
+					<ProtectedRoute path="/admin/data-tables" exact component={DataTables} />
 				</Switch>
 			</div>
 

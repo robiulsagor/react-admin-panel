@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMThlNzEwMDM0NDJiMjI0NGY2Mzc2NCIsImVtYWlsIjoiR2VyaGFyZDQ0QGdtYWlsLmNvbSIsImlhdCI6MTY1NDc3MDc1MiwiZXhwIjoxNjU1MzcwNzUyfQ.q9ifAY-duzDfu5BvqapBmmeWo5soUJL2Fa63fjczkKs"
+const token = JSON.parse(JSON.parse(localStorage.getItem('persist:root')).authSlice).token
 
 export const AxiosAPI = axios.create({
     baseURL: 'http://65.0.4.24:8080/admin',
@@ -16,6 +16,12 @@ export const getVals = (url, apiKey) => {
     }).then(res => res.data)
 }
 
+// get list like doctors and hospitals
 export const getList = (url) => {
     return AxiosAPI.post(url).then(res => res)
+}
+
+// login user
+export const fetchUser = (url, data) => {
+    return AxiosAPI.post(url, data).then(res => res)
 }

@@ -30,6 +30,9 @@ const doctorListSlice = createSlice({
             state.isLoading = false
             state.doctors = action.payload
         },
+        [getAllDoctors.rejected]: (state) => {
+            state.isLoading = false
+        },
     }
 })
 
