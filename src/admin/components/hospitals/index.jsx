@@ -16,7 +16,7 @@ import IMG07 from "../../assets/images/doctors/doctor-thumb-03.jpg";
 import IMG08 from "../../assets/images/doctors/doctor-thumb-04.jpg";
 import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllHospitals } from "../../../features/hospitalList/hospitalListSllice";
+import { getAllHospitals } from "../../../features/hospitalList/hospitalListSlice";
 
 const Hospitals = () => {
     const dispatch = useDispatch()
@@ -40,9 +40,6 @@ const Hospitals = () => {
             { id: d.id, image: IMG01, HospitalName: d.name, Address: d.address, DailyAppointments: d.totalDailyAppointments, Members: dateSpllit[0], Time: dateSpllit[1], status: d.isActive }
         )
     })
-
-    console.log(data);
-
 
     // const data = [
     //     {
@@ -162,7 +159,7 @@ const Hospitals = () => {
                     >
                         <img alt="" src={record.image} />
                     </Link>
-                    <Link to="/admin/profile">{text}</Link>
+                    <Link to={`/admin/hospital/${record.id}`}>{text}</Link>
                 </h2>
             ),
             sorter: (a, b) => a.leavetype.length - b.leavetype.length,

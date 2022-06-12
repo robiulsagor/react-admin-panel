@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getList } from "../../API/AxiosAPI";
+import { getDetails, getList } from "../../API/AxiosAPI";
 
 const initialState = {
     hospitals: [],
@@ -10,6 +10,19 @@ export const getAllHospitals = createAsyncThunk(
     'hospitalList/getAllHospitals',
     async () => {
         return getList('hospital/list').then(res => res.data.data.data)
+    }
+)
+
+export const getHospitalDetails = createAsyncThunk(
+    'hospitalList/gethHospitalDetails',
+    async (id, { rejectWithValue }) => {
+        try {
+            const getData = await getDetails(`/hospital/${id}`)
+            console.log(getData);
+            return await getData
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
     }
 )
 

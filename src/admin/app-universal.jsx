@@ -41,6 +41,8 @@ import Hospitals from './components/hospitals';
 import CreateHospital from './components/createHospital';
 
 import ProtectedRoute from './ProtectedRoute'
+import HospitalDetails from './components/hosptitalDetails';
+
 
 
 const AppUniversal = function (props) {
@@ -56,6 +58,7 @@ const AppUniversal = function (props) {
 					<ProtectedRoute path="/admin/appointment-list" exact component={Appointments} />
 					<ProtectedRoute path="/admin/specialities" exact component={Specialities} />
 					<ProtectedRoute path="/admin/hospital-list" exact component={Hospitals} />
+					<ProtectedRoute path="/admin/hospital/:id" exact component={HospitalDetails} />
 					<ProtectedRoute path="/admin/hospital-list/create-hospital" exact component={CreateHospital} />
 					<ProtectedRoute path="/admin/doctor-list" exact component={Doctors} />
 					<ProtectedRoute path="/admin/doctor-list/add-doctor" exact component={AddDoctor} />
@@ -90,6 +93,7 @@ const AppUniversal = function (props) {
 					<ProtectedRoute path="/admin/data-tables" exact component={DataTables} />
 				</Switch>
 			</div>
+
 
 		</Router>
 	);

@@ -2,22 +2,27 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
-import hospitalListReducer from "../features/hospitalList/hospitalListSllice";
+import hospitalListReducer from "../features/hospitalList/hospitalListSlice";
 import hospitalRegiReducer from "../features/hospitalRegister/hospitalRegiSlice";
 import doctorListReducer from "../features/doctorList/doctorListSlice";
 import authReducer from "../features/auth/authSlice";
+import specialitiesReducer from "../features/departments/specialitiesSlice";
+import getDetailsReducer from "../features/getDetails/getDetailsSlice";
 
 
 const reducers = combineReducers({
     hospitalRegi: hospitalRegiReducer,
     hospitalList: hospitalListReducer,
     doctorList: doctorListReducer,
+    specialities: specialitiesReducer,
+    getDetails: getDetailsReducer,
     authSlice: authReducer
 })
 
 const persistConfig = {
     key: 'root',
-    storage
+    storage,
+    whitelist: ['authSlice']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

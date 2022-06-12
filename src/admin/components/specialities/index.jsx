@@ -9,9 +9,15 @@ import IMG02 from '../../assets/images/specialities-02.png';
 import IMG03 from '../../assets/images/specialities-03.png';
 import IMG04 from '../../assets/images/specialities-04.png';
 import IMG05 from '../../assets/images/specialities-05.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { createSpecialites } from '../../../features/departments/specialitiesSlice';
 
 const Specialities = () => {
 	const [show, setShow] = useState(null)
+	const [specialityName, setSpecialityName] = useState('')
+
+	const dispatch = useDispatch()
+	const { isError, isSuccess, isLoading } = useSelector(state => state.specialities)
 
 	const data = [
 		{ id: '#SP001', image: IMG01, specialities: 'Cardiologist' },
@@ -19,18 +25,36 @@ const Specialities = () => {
 		{ id: '#SP003', image: IMG03, specialities: 'Neurology' },
 		{ id: '#SP004', image: IMG04, specialities: 'Orthopedic' },
 		{ id: '#SP005', image: IMG05, specialities: 'Urology' }
-
 	]
 
 	const handleClose = () => {
 		setShow(false)
 	}
 
-	const handleShow = (id) => {
-		setShow(id)
+	const handleShow = (type) => {
+		setShow(type)
 	}
 
+	// to show notification
+	const [showNoti, setShowNoti] = useState(false)
 
+	if (showNoti) {
+		setTimeout(() => {
+			setShowNoti(false)
+			console.log(showNoti);
+		}, 3000)
+		console.log(showNoti);
+	}
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		if (specialityName) {
+			const data = { departmentName: specialityName }
+			dispatch(createSpecialites(data))
+			setShowNoti(true)
+			setShow(false)
+		}
+	}
 
 
 	const columns = [
@@ -83,6 +107,20 @@ const Specialities = () => {
 						</div>
 					</div>
 
+					{/* show message */}
+					{(showNoti && (isError || isSuccess)) && (
+						<div className="row">
+							<div className="col-6 mx-auto">
+								<div className={isError ? "alert alert-danger alert-dismissible fade show" : "alert alert-success alert-dismissible fade show"} role="alert">
+									{isError ? "Error, Operation Couldn't be done" : "Speciality added Successfully"}
+									<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+							</div>
+						</div>)}
+
+
 					<div className="row">
 						<div className="col-md-12">
 							<div className="card">
@@ -117,20 +155,22 @@ const Specialities = () => {
 						<Modal.Title><h5 className="modal-title">{show === 'add' ? 'Add Specialities' : 'Edit Specialities'}</h5></Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
-						<form>
+						<form onSubmit={handleSubmit}>
 							<div className="row form-row">
-								<div className="col-12 col-sm-6">
+								<div className="col-12">
 									<div className="form-group">
 										<label>Specialities</label>
-										<input type="text" className="form-control" />
+										<input type="text" className="form-control" value={specialityName} onChange={e => setSpecialityName(e.target.value)} />
 									</div>
 								</div>
-								<div className="col-12 col-sm-6">
+
+								{/* for img uploading */}
+								{/* <div className="col-12 col-sm-6">
 									<div className="form-group">
 										<label>Image</label>
 										<input type="file" className="form-control" />
 									</div>
-								</div>
+								</div> */}
 
 							</div>
 							<button type="submit" className="btn btn-primary btn-block">Save Changes</button>
