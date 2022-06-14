@@ -11,8 +11,6 @@ function ProtectedRoute({ component: Component, ...restOfProps }) {
             {...restOfProps}
             render={(props) =>
                 isLoggedIn === true ? <Component {...props} /> : <Redirect to="/admin/login" />
-                // isLoggedIn === true ? console.log("Logged in") : console.log("not")
-                // isLoggedIn === false && <Component {...props} />
             }
         />
     );

@@ -11,14 +11,15 @@ const initialState = {
     isSuccess: false,
     isError: false,
     isLoggedIn: false,
-    message: ''
+    message: '',
+    reloaded: false
 }
 
 export const loginUser = createAsyncThunk(
     'authSlice/loginUser',
     async (data, { rejectWithValue }) => {
         try {
-            const res = await fetchUser("auth/login", data)
+            const res = await fetchUser("http://65.0.4.24:8080/admin/auth/login", data)
             return await res.data.data
         } catch (err) {
             return rejectWithValue(err.response.data)
@@ -36,6 +37,13 @@ const authSlice = createSlice({
             state.id = ''
             state.token = ''
             state.isLoggedIn = false
+            state.isSuccess = false
+            state.isLoading = false
+            state.isError = false
+
+        },
+        reload(state) {
+            state.reloaded = true
         }
     },
     extraReducers: {
@@ -63,5 +71,5 @@ const authSlice = createSlice({
     }
 })
 
-export const { logout } = authSlice.actions
+export const { logout, reload } = authSlice.actions
 export default authSlice.reducer        

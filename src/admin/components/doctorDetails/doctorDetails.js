@@ -7,22 +7,20 @@ import { Modal } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getHospitalDetails } from '../../../features/getDetails/getDetailsSlice'
+import { getDoctorDetails } from '../../../features/getDetails/getDetailsSlice'
 import { updateInfo } from '../../../features/updateInfo/updateInfo';
 
-const HospitalDetails = () => {
+const DoctorDetails = () => {
     const [key, setKey] = useState(1)
     const [show, setShow] = useState(false)
     const [startDate, setStartDate] = useState(new Date())
-
-
 
     const dispatch = useDispatch()
     const location = useLocation()
     const id = location.pathname.split('/')[3]
 
     useEffect(() => {
-        dispatch(getHospitalDetails(id))
+        dispatch(getDoctorDetails(id))
     }, [])
 
     const { isError, isSuccess, isLoading, data } = useSelector(state => state.getDetails)
@@ -73,7 +71,7 @@ const HospitalDetails = () => {
         const compactData = { data, id }
 
         dispatch(updateInfo(compactData))
-        dispatch(getHospitalDetails(id))
+        dispatch(getDoctorDetails(id))
         setShowNoti(true)
         handleClose()
     }
@@ -93,11 +91,11 @@ const HospitalDetails = () => {
                     <div className="page-header">
                         <div className="row">
                             <div className="col">
-                                <h3 className="page-title">Hospital Details</h3>
+                                <h3 className="page-title">Doctor Details</h3>
                                 <ul className="breadcrumb">
                                     <li className="breadcrumb-item"><Link to="/admin">Dashboard</Link></li>
-                                    <li className="breadcrumb-item"><Link to="/admin/hospital-list">Hospital List</Link></li>
-                                    <li className="breadcrumb-item active">Hospital Details</li>
+                                    <li className="breadcrumb-item"><Link to="/admin/doctor-list">Doctor list</Link></li>
+                                    <li className="breadcrumb-item active">Doctor Details</li>
                                 </ul>
                             </div>
                         </div>
@@ -144,6 +142,7 @@ const HospitalDetails = () => {
 
                     {isError && (
                         <div className="d-flex flex-column justify-content-center align-items-center" style={{ height: '60vh' }} >
+
                             <h3 className="text-danger">Something Went Wrong.</h3>
                             <h4 className="text-danger">Please try again</h4>
                         </div>
@@ -170,7 +169,7 @@ const HospitalDetails = () => {
                                     <div className="card">
                                         <div className="card-body">
                                             <h5 className="card-title d-flex justify-content-between">
-                                                <span>Hospital Details</span>
+                                                <span>Doctor Details</span>
                                                 <Link to="#0" className="edit-link" onClick={handleShow}>
                                                     <i className="fa fa-edit mr-1"></i>Edit
                                                 </Link>
@@ -438,4 +437,4 @@ const HospitalDetails = () => {
 }
 
 
-export default HospitalDetails;
+export default DoctorDetails;

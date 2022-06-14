@@ -13,7 +13,18 @@ export const getHospitalDetails = createAsyncThunk(
     async (id, { rejectWithValue }) => {
         try {
             const getData = await getDetails(`/hospital/${id}`)
-            console.log(getData);
+            return await getData.data
+        } catch (error) {
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
+export const getDoctorDetails = createAsyncThunk(
+    'getDetails/getDoctorDetails',
+    async (id, { rejectWithValue }) => {
+        try {
+            const getData = await getDetails(`/user/${id}`)
             return await getData.data
         } catch (error) {
             return rejectWithValue(error.response.data)
@@ -43,6 +54,24 @@ const getDetailsSlice = createSlice({
             state.isError = true
             state.data = {}
         },
+        [getDoctorDetails.pending]: state => {
+            state.isLoading = true
+            state.isSuccess = false
+            state.isError = false
+            state.data = {}
+        },
+        [getDoctorDetails.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
+            state.data = action.payload.data
+        },
+        [getDoctorDetails.rejected]: state => {
+            state.isLoading = false
+            state.isSuccess = false
+            state.isError = true
+            state.data = {}
+        }
     }
 })
 

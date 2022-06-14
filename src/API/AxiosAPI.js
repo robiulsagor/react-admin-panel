@@ -1,6 +1,11 @@
-import axios from "axios"
+import axios, { Axios } from "axios"
 
-const token = (JSON.parse(localStorage.getItem('persist:root')) && JSON.parse(JSON.parse(localStorage.getItem('persist:root')).authSlice).token) || ''
+// const token = (localStorage.getItem('persist:root') &&
+// JSON.parse(JSON.parse(localStorage.getItem('persist:root')).authSlice).token))
+
+// const token = (JSON.parse(localStorage.getItem('persist:root')) && JSON.parse(JSON.parse(localStorage.getItem('persist:root').authSlice).token)) || ''
+// console.log(token);
+const token = (localStorage.getItem('persist:root') && JSON.parse(localStorage.getItem('persist:root')).authSlice && JSON.parse(JSON.parse(localStorage.getItem('persist:root')).authSlice).token) || ''
 
 export const AxiosAPI = axios.create({
     baseURL: 'http://65.0.4.24:8080/admin',
@@ -23,7 +28,7 @@ export const getList = (url) => {
 
 // login user
 export const fetchUser = (url, data) => {
-    return AxiosAPI.post(url, data).then(res => res)
+    return axios.post(url, data).then(res => res)
 }
 
 // create elements like - create specialities
@@ -34,4 +39,14 @@ export const createRecord = (url, data) => {
 // for get single hospital details
 export const getDetails = url => {
     return AxiosAPI.get(url).then(res => res)
+}
+
+// const data = { name: "Apolo", address: "Khulna" }
+
+export const updateDetails = (url, data) => {
+    return AxiosAPI.put(url, data).then(res => res)
+}
+
+export const deleteRecord = url => {
+    return AxiosAPI.delete(url).then(res => res)
 }

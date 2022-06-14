@@ -27,9 +27,10 @@ const Doctors = () => {
 
 
   // get the hospital details from redux store
-  const getData = useSelector(state => state.doctorList.doctors)
+  const { doctors, isLoading, isSuccess, isError } = useSelector(state => state.doctorList)
+  console.log("err, ", isError);
 
-  const data = getData.map((d, index) => {
+  const data = doctors.map((d, index) => {
     var date = new Date(d.createdAt)
     date = date.toLocaleString()
     const dateSpllit = date.split(",")
@@ -168,7 +169,7 @@ const Doctors = () => {
           >
             <img alt="" src={record.image} />
           </Link>
-          <Link to="/admin/profile">{text}</Link>
+          <Link to={`/admin/doctor/${record.id}`}>{text}</Link>
         </h2>
       ),
       sorter: (a, b) => a.leavetype.length - b.leavetype.length,
@@ -235,9 +236,8 @@ const Doctors = () => {
                     <Link to="/admin">Dashboard</Link>
                   </li>
                   <li className="breadcrumb-item">
-                    <Link to="#0">Users</Link>
+                    <li className="breadcrumb-item active">Doctor List</li>
                   </li>
-                  <li className="breadcrumb-item active">Doctor</li>
                 </ul>
               </div>
               <div className="col-sm-5 col">
@@ -248,33 +248,55 @@ const Doctors = () => {
             </div>
           </div>
 
-          <div className="row">
-            <div className="col-md-12">
-              <div className="card">
-                <div className="card-body">
-                  <div className="table-responsive">
-                    <Table
-                      className="table-striped"
-                      style={{ overflowX: "auto" }}
-                      columns={columns}
-                      // bordered
-                      dataSource={data}
-                      rowKey={(record) => record.id}
-                      showSizeChanger={true}
-                      pagination={{
-                        total: data.length,
-                        showTotal: (total, range) =>
-                          `Showing ${range[0]} to ${range[1]} of ${total} entries`,
-                        showSizeChanger: true,
-                        onShowSizeChange: onShowSizeChange,
-                        itemRender: itemRender,
-                      }}
-                    />
+          {/* show the loading spinner */}
+          {isLoading && (<>
+            <div className="  d-flex flex-column justify-content-center align-items-center" style={{ height: '60vh' }} >
+
+              <div className="spinner-grow"
+                style={{ width: '3rem', height: '3rem' }} role="status">
+                <span className="sr-only">Loading...</span>
+              </div>
+              <h4 className='mt-3'>Loading...</h4>
+            </div>
+          </>
+          )}
+
+          {isError && (
+            <div className="d-flex flex-column justify-content-center align-items-center " style={{ height: '60vh' }} >
+              <h3 className="text-danger">Something Went Wrong.</h3>
+              <h4 className="text-danger">Please try again</h4>
+            </div>
+          )}
+
+          {isSuccess && (
+            <div className="row">
+              <div className="col-md-12">
+                <div className="card">
+                  <div className="card-body">
+                    <div className="table-responsive">
+                      <Table
+                        className="table-striped"
+                        style={{ overflowX: "auto" }}
+                        columns={columns}
+                        // bordered
+                        dataSource={data}
+                        rowKey={(record) => record.id}
+                        showSizeChanger={true}
+                        pagination={{
+                          total: data.length,
+                          showTotal: (total, range) =>
+                            `Showing ${range[0]} to ${range[1]} of ${total} entries`,
+                          showSizeChanger: true,
+                          onShowSizeChange: onShowSizeChange,
+                          itemRender: itemRender,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Edit Modal */}

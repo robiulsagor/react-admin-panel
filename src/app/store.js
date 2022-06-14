@@ -8,6 +8,8 @@ import doctorListReducer from "../features/doctorList/doctorListSlice";
 import authReducer from "../features/auth/authSlice";
 import specialitiesReducer from "../features/departments/specialitiesSlice";
 import getDetailsReducer from "../features/getDetails/getDetailsSlice";
+import updateInfoReducer from "../features/updateInfo/updateInfo";
+import deleteRecordReducer from "../features/deleteRecord/deleteRecordSlice";
 
 
 const reducers = combineReducers({
@@ -16,6 +18,8 @@ const reducers = combineReducers({
     doctorList: doctorListReducer,
     specialities: specialitiesReducer,
     getDetails: getDetailsReducer,
+    updateSlice: updateInfoReducer,
+    deleteRecord: deleteRecordReducer,
     authSlice: authReducer
 })
 

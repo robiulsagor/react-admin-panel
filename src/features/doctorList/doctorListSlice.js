@@ -3,7 +3,9 @@ import { getList } from "../../API/AxiosAPI";
 
 const initialState = {
     doctors: [],
-    isLoading: false
+    isLoading: false,
+    isSuccess: false,
+    isError: false
 }
 
 export const getAllDoctors = createAsyncThunk(
@@ -25,14 +27,20 @@ const doctorListSlice = createSlice({
     extraReducers: {
         [getAllDoctors.pending]: (state) => {
             state.isLoading = true
+            state.isError = false
+            state.isSuccess = false
         },
         [getAllDoctors.fulfilled]: (state, action) => {
             state.isLoading = false
+            state.isSuccess = true
+            state.isError = false
             state.doctors = action.payload
         },
         [getAllDoctors.rejected]: (state) => {
             state.isLoading = false
-        },
+            state.isError = true
+            state.isSuccess = false
+        }
     }
 })
 

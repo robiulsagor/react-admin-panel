@@ -1,8 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, Redirect } from 'react-router-dom';
 import Logo from '../../assets/images/logo-white.png';
 import { useDispatch, useSelector } from 'react-redux'
-import { loginUser } from '../../../features/auth/authSlice';
+import { loginUser, reload } from '../../../features/auth/authSlice';
 
 const Login = () => {
 	const [email, setEmail] = useState('')
@@ -19,13 +19,14 @@ const Login = () => {
 			dispatch(loginUser(data))
 		}
 	}
-	const { name, isError, isLoading, isSuccess, isLoggedIn, message } = useSelector(state => state.authSlice)
+	const { name, isError, isLoading, isSuccess, isLoggedIn, message, reloaded } = useSelector(state => state.authSlice)
 
 	useEffect(() => {
 		if (isLoggedIn) {
-			history.push("/admin")
+			window.location.assign("/admin")
 		}
 	}, [isLoggedIn])
+
 	return (
 		<div>
 			<div className="main-wrapper login-body">
